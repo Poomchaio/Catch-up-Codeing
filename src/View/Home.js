@@ -2,28 +2,38 @@ import React, { Component } from 'react';
 import { Button, Form } from 'semantic-ui-react';
 import { Redirect } from 'react-router-dom';
 import { Flex, Box, BackgroundImage } from 'rebass';
-import styled from 'styled-components';
 
 import Text from '../Components/Text/Text';
+import styled from '../../node_modules/styled-components';
 
-const FontH1 = styled.h1`
-  font-family: 'Gaegu';
-  font-size: 54px;
-  font-weight: 900;
-  margin: 0;
-`;
-
-const FontH4 = styled.h4`
-  font-family: 'Gaegu';
-  font-size: 20px;
-  font-weight: 600;
+const BgContainer = styled(Flex)`
+  min-height: 100%;
 `;
 
 class Home extends Component {
+  state = {
+    redirect: false,
+    displayName: '',
+    passcode: '',
+  };
+
+  handleChange = (key, value) => {
+    this.setState({ [key]: value });
+  };
+  handleSubmit = () => {
+    console.log('onclick', this.state);
+    if (this.state.passcode === 'ching') {
+      console.log('SUCCESS');
+      this.setState({ redirect: true });
+    }
+  };
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/qa" />;
+    }
     return (
-      <Flex alignItems="center" justifyContent="center">
-        <Box width={500}>
+      <BgContainer mt="12%" alignItems="center" justifyContent="center">
+        <Box p={5} width={600} bg="white">
           <Flex alignItems="center" justifyContent="center">
             <Text fontSize="54px" fontWeight="900">
               WELCOME
@@ -36,15 +46,19 @@ class Home extends Component {
               />
             </Box>
           </Flex>
-          <Form>
+          <Form onSubmit={this.handleSubmit}>
             <Flex my={4}>
               <Box w={1 / 3} alignSelf="center">
                 <Text fontSize="20px" fontWeight="600">
                   PASSCODE :
                 </Text>
               </Box>
-              <Box w={2 / 3}>
-                <Form.Field control="input" placeholder="Passcode" />
+              <Box w={2 / 3} mr={2}>
+                <Form.Input
+                  value={this.state.passcode}
+                  placeholder="Passcode"
+                  onChange={e => this.handleChange('passcode', e.target.value)}
+                />
               </Box>
             </Flex>
             <Flex my={4}>
@@ -53,23 +67,22 @@ class Home extends Component {
                   DISPLAY NAME :
                 </Text>
               </Box>
-              <Box w={2 / 3}>
-                <Form.Field control="input" placeholder="Display name" />
+              <Box w={2 / 3} mr={2}>
+                <Form.Input
+                  value={this.state.displayName}
+                  placeholder="Display name"
+                  onChange={e => this.handleChange('displayName', e.target.value)}
+                />
               </Box>
             </Flex>
-            <Flex justifyContent="flex-end">
-              <Button
-                size="big"
-                primary
-                type="submit"
-                onSubmit={() => <Redirect to="/gitlist">Git List</Redirect>}
-              >
+            <Flex justifyContent="flex-end" mt={2}>
+              <Button size="big" primary type="submit">
                 <Text>START LEARNING !</Text>
               </Button>
             </Flex>
           </Form>
         </Box>
-      </Flex>
+      </BgContainer>
     );
   }
 }
