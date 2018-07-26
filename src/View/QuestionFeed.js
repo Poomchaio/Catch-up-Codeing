@@ -76,7 +76,6 @@ class QuestionFeed extends Component {
   };
   render() {
     const { user } = this.props;
-
     const { questions, filter, sections, hideText } = this.state;
     const questionArray = questions
       ? Object.keys(questions).map(function(key) {
@@ -103,9 +102,11 @@ class QuestionFeed extends Component {
         </Box>
         <Box width={[1, 3 / 5]}>
           <Feed>
-            {filteredFeedItem.reverse().map(e => {
+            {filteredFeedItem.reverse().map((e, index) => {
               return (
                 <FeedItem
+                  key={index}
+                  currentUser={user.displayName}
                   hideText={hideText}
                   sections={sections}
                   firebase={this.firebaseRef}
