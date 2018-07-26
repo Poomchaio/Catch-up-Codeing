@@ -30,14 +30,31 @@ class FeedItem extends Component {
   handleLike = () => {
     const questionId = this.props.id;
     const countLike = this.props.likes ? Object.keys(this.props.likes).length : 0;
-    console.log(countLike);
-    console.log(questionId);
     this.props.firebase
       .child(questionId)
       .child('likes')
       .push({
         [this.props.passcode]: 1,
       });
+  };
+
+  handleUnlike = () => {
+    const questionId = this.props.id;
+    const likes = this.props.likes;
+    let likeId = '';
+    Object.keys(likes).map(key => {
+      const like = likes[key];
+      Object.keys(like).map(element => {
+        if (element == this.props.passcode) {
+          likeId = key;
+        }
+      });
+    });
+    this.props.firebase
+      .child(questionId)
+      .child('likes')
+      .child(likeId)
+      .remove();
   };
 
   handleAnswer = () => {
@@ -96,7 +113,7 @@ class FeedItem extends Component {
           return likes[key];
         })
       : [];
-    console.log(likes);
+
     return (
       <Feed.Event style={{ borderBottom: '1px solid #eaeaea', marginBottom: '24px' }}>
         <Box width={80} pr={2}>
@@ -131,7 +148,7 @@ class FeedItem extends Component {
           <Feed.Meta>
             <Feed.Like>
               {liked ? (
-                <Button compact basic size="mini">
+                <Button compact basic size="mini" onClick={this.handleUnlike}>
                   <Icon name="like" color="red" />
                   {likeArray.length} Likes
                 </Button>
