@@ -99,7 +99,7 @@ class FeedItem extends Component {
   render() {
     const { user, question, section, likes, answers = [], hideText, passcode } = this.props;
     const { expand } = this.state;
-    const sectionText = section == 0 ? 'General' : `Section ${section}`;
+    const sectionText = section == -1 ? 'General' : `Section ${section}`;
     let liked = false;
     const likeArray = likes
       ? Object.keys(likes).map(key => {

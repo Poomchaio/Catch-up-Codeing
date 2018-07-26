@@ -22,7 +22,7 @@ class QuestionForm extends Component {
     sections: [],
   };
 
-  state = { question: '', section: '' };
+  state = { question: '', section: -1 };
 
   handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
@@ -31,7 +31,7 @@ class QuestionForm extends Component {
   handleSubmit = () => {
     const { handleFormSubmit } = this.props;
     const copyState = this.state;
-    this.setState({ question: '', section: '' });
+    this.setState({ question: '', section: -1 });
     handleFormSubmit(copyState);
   };
 

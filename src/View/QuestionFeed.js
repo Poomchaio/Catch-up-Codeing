@@ -11,7 +11,9 @@ import firebase from '../Components/firebase';
 
 const filterData = (items, filter, user) => {
   let filterItem = items;
-  if (filter.section) filterItem = filterItem.filter(item => filter.section === item.section);
+  if (filter.section) {
+    filterItem = filterItem.filter(item => filter.section === item.section);
+  }
   if (filter.postByUser)
     filterItem = filterItem.filter(item => user.passcode === item.user.passcode);
   if (filter.keyword)
@@ -32,7 +34,7 @@ class QuestionFeed extends Component {
     questions: [],
     filter: {},
     sections: [
-      { key: 'all', text: 'General', value: 0 },
+      { key: 'all', text: 'General', value: -1 },
       { key: '1', text: 'section 1', value: 1 },
       { key: '2', text: 'section 2', value: 2 },
       { key: '3', text: 'section 3', value: 3 },

@@ -35,6 +35,7 @@ class QuestionFilter extends Component {
   render() {
     const { section, keyword } = this.state;
     const { sections, handleFilter } = this.props;
+    const sectionsWithNone = [{ key: 'none', text: 'Show All', value: 0 }].concat(sections);
     return (
       <Flex mx={2} justifyContent="center" alignItems="center" flexWrap="wrap">
         <Box width={1} align="center" p={2}>
@@ -69,7 +70,7 @@ class QuestionFilter extends Component {
               control={Select}
               label="Section"
               name="section"
-              options={sections}
+              options={sectionsWithNone}
               placeholder="Section"
               value={section}
               onChange={this.handleChange}
