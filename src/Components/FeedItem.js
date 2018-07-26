@@ -57,7 +57,7 @@ class FeedItem extends Component {
   };
 
   handleAnswer = () => {
-    const user = this.props.user;
+    const user = this.props.currentUser;
     const countAnswer = this.props.answers ? Object.keys(this.props.answers).length : 0;
     const questionId = this.props.id;
     this.props.firebase
