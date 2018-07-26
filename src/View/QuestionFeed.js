@@ -87,7 +87,7 @@ class QuestionFeed extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <Flex flexWrap="wrap" my="2%" mx="5%" justifyContent="center">
+      <Flex flexWrap="wrap" my="2%" mx="10%" justifyContent="space-around">
         <Box width={1} mb={3}>
           <QuestionForm
             imgSrc={user.imgSrc}
