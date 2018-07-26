@@ -27,7 +27,7 @@ class QuestionFilter extends Component {
 
   handleChange = (e, { name, value, type }) => {
     if (name === 'postByUser') {
-      this.setState({ [name]: !value });
+      this.setState({ [name]: !this.state[name] });
     } else {
       this.setState({ [name]: value });
     }

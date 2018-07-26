@@ -14,7 +14,7 @@ export default class Header extends Component {
     }).isRequired,
   };
   static defaultProps = {
-    list: [{ name: 'Q&A', to: '/main/qa' }, { name: 'code', to: '/main/code' }],
+    list: [{ name: 'Q&A', to: '/main/qa' }, { name: 'Code', to: '/main/code' }],
     isLogin: true,
   };
 
@@ -22,6 +22,14 @@ export default class Header extends Component {
     activeItem: 'Q&A',
     redirect: false,
   };
+
+  componentDidMount() {
+    const path = this.props.pathName;
+    if (path === '/main/code') {
+      this.setState({ activeItem: 'Code' });
+    }
+  }
+
   handleItemClick = (e, { name }) => {
     this.setState({ activeItem: name });
   };

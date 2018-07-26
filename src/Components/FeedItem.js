@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import AnswerItem from './AnswerItem';
 import Text from './Text/Text';
 import ConfirmModal from './ConfirmModal';
-import firebase from './firebase';
 
 const GrayFlex = styled(Flex)`
   border: 1px solid rgb(224, 225, 226);
@@ -73,7 +72,7 @@ class FeedItem extends Component {
   };
 
   handleKeyEvent = e => {
-    if (e.key == 'Enter') {
+    if (e.key === 'Enter') {
       this.handleAnswer();
     }
   };
@@ -98,14 +97,14 @@ class FeedItem extends Component {
   };
 
   render() {
-    const { user, question, section, likes, answers = [], sections, passcode } = this.props;
+    const { user, question, section, likes, answers = [], hideText, passcode } = this.props;
     const { expand } = this.state;
     const sectionText = section == 0 ? 'General' : `Section ${section}`;
     let liked = false;
     const likeArray = likes
       ? Object.keys(likes).map(key => {
           Object.keys(likes[key]).map(element => {
-            if (element == passcode) {
+            if (element === passcode) {
               liked = true;
             }
           });
@@ -116,7 +115,7 @@ class FeedItem extends Component {
 
     return (
       <Feed.Event style={{ borderBottom: '1px solid #eaeaea', marginBottom: '24px' }}>
-        <Box width={80} pr={2}>
+        <Box width={55} mr={2}>
           <Image src={user.imgSrc} />
         </Box>
         <Feed.Content width={1}>
@@ -125,15 +124,14 @@ class FeedItem extends Component {
               <Text primary>{user.displayName}</Text>
             </Feed.User>
             <Feed.Date>{sectionText}</Feed.Date>
-            <Button compact basic size="mini" floated="right" onClick={this.handleExpand}>
+            <Button basic size="mini" floated="right" onClick={this.handleExpand} icon={hideText}>
               <Icon name={expand ? 'chevron up' : 'chevron down'} />
-              {expand ? 'Hide ans' : 'Show ans'}
+              {!hideText && (expand ? 'Hide all answers' : 'Show all answers')}
             </Button>
             <Button
-              basic
-              compact
-              size="mini"
               icon="trash"
+              basic
+              size="mini"
               floated="right"
               onClick={() => this.setState({ open: true })}
             />

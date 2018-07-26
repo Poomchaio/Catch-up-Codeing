@@ -7,23 +7,22 @@ class Commit extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { commits } = this.props;
     return (
-      <Flex flexDirection="column" my="2%" mx="5%" justifyContent="center" wrap>
+      <Flex flexDirection="column" my="2%" mx="5%" justifyContent="center" flexWrap="wrap">
         <Flex mb={4}>
-          <Box width={1 / 9}>
+          <Box width={[1 / 3, 1 / 9]}>
             <h2>Section</h2>
           </Box>
-          <Box width={7 / 9}>
+          <Box width={[2 / 3, 7 / 9]}>
             <h2>Description</h2>
           </Box>
         </Flex>
         {commits.map((commit, index) => {
           return (
-            <Flex mb={3} ml={3}>
+            <Flex mb={3} ml={3} key={index}>
               <Box
-                width={2 / 25}
+                width={[1 / 3, 2 / 25]}
                 is="a"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -32,7 +31,7 @@ class Commit extends Component {
               >
                 Section {index + 1}
               </Box>
-              <Box width={8 / 9} mr={3} pl={3} href={commit.html_url}>
+              <Box width={[2 / 3, 8 / 9]} mr={3} pl={3} href={commit.html_url}>
                 {commit.commit.message}
               </Box>
             </Flex>

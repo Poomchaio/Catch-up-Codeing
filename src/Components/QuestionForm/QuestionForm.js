@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Select, TextArea } from 'semantic-ui-react';
-import { Flex, Box, Image, Circle } from 'rebass';
+import { Flex, Box, Image } from 'rebass';
 import PropTypes from 'prop-types';
 
 class QuestionForm extends Component {

@@ -21,7 +21,6 @@ class Home extends Component {
     this.setState({ [key]: value });
   };
   handleSubmit = () => {
-    console.log('onclick', this.state);
     this.firebaseRef.set({
       [this.state.passcode]: this.state.displayName ? this.state.displayName : 'Anonymous',
     });
